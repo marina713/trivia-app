@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
   categoryContainer: {
     backgroundColor: "ghostwhite",
     alignItems: 'center',
-    paddingTop: 15,
-    paddingBottom: 22,
+    paddingTop: 12,
+    paddingBottom: 18,
     paddingHorizontal: 20
   },
 });
