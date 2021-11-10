@@ -1,32 +1,12 @@
 import {
   initialState,
-  SET_DATA,
-  SET_CURRENT_ITEM,
   SUBMIT_ANSWER,
   RESET,
+  REQUEST_DATA_SUCCESS,
 } from "./constants";
 
 const quizReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case SET_DATA: {
-      const {
-        payload: { value },
-      } = action;
-      return {
-        ...state,
-        data: value,
-      };
-    }
-
-    case SET_CURRENT_ITEM: {
-      const {
-        payload: { value },
-      } = action;
-      return {
-        ...state,
-        currentItem: value,
-      };
-    }
     case SUBMIT_ANSWER: {
       const {
         payload: { value, index },
@@ -41,6 +21,16 @@ const quizReducer = (state = initialState, action: any) => {
         data: state.data.map((item, i) => (index === i ? updatedValue : item)),
       };
     }
+
+    case REQUEST_DATA_SUCCESS: {
+      console.log({ action });
+      const { data } = action;
+      return {
+        ...state,
+        data,
+      };
+    }
+
     case RESET: {
       return initialState;
     }

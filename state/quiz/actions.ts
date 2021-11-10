@@ -1,19 +1,11 @@
-import { SET_CURRENT_ITEM, SET_DATA, SUBMIT_ANSWER, RESET } from "./constants";
+import {
+  SUBMIT_ANSWER,
+  RESET,
+  REQUEST_DATA,
+  REQUEST_DATA_SUCCESS,
+  RequestDataPayload,
+} from "./constants";
 import type { Data, Item } from "../../types";
-
-export const setCurrentItem = (value: Item) => {
-  return {
-    type: SET_CURRENT_ITEM,
-    payload: { value },
-  };
-};
-
-export const setData = (value: Data) => {
-  return {
-    type: SET_DATA,
-    payload: { value },
-  };
-};
 
 export const submitAnswer = (value: string, index: number) => {
   return {
@@ -25,5 +17,19 @@ export const submitAnswer = (value: string, index: number) => {
 export const reset = () => {
   return {
     type: RESET,
+  };
+};
+
+export const requestData = (payload: RequestDataPayload) => {
+  return {
+    type: REQUEST_DATA,
+    payload,
+  };
+};
+
+export const requestDataSuccess = (value: Data) => {
+  return {
+    type: REQUEST_DATA_SUCCESS,
+    payload: { value },
   };
 };

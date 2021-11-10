@@ -1,24 +1,25 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { decode } from 'html-entities';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Question from '../components/Question';
 import { View, Text } from '../components/Themed';
-import { getData, getCurrentIdx } from "../state/quiz/selectors";
+import { getData, getCurrentIdx, getCurrentItem } from "../state/quiz/selectors";
 
 import { RootStackScreenProps } from '../types';
 
 export default function Quiz({ navigation }: RootStackScreenProps<'Quiz'>) {
   const data = useSelector(getData);
   const currentIdx = useSelector(getCurrentIdx);
+  const currentItem = useSelector(getCurrentItem);
 
 
   if (currentIdx + 1 > data.length && data.length) { navigation.navigate("Results") }
-  if (!data || !data[currentIdx]) { return null }
+  if (!data || !currentItem) { return null }
 
-  const question = decode(data[currentIdx].question)
-  const category = decode(data[currentIdx].category)
+  const question = decode(currentItem.question)
+  const category = decode(currentItem.category)
 
   return (
     <View style={styles.container}>

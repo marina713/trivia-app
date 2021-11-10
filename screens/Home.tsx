@@ -6,28 +6,19 @@ import AnimatedLoader from 'react-native-animated-loader';
 
 import { Text, View, Button } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
-import { setData } from '../state/quiz/actions';
+import { requestData } from '../state/quiz/actions';
 
 
 export default function HomeScreen({ navigation }: RootStackScreenProps<'HomeScreen'>) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false)
-  const getQuestions = async () => {
-    try {
-      const response = await fetch('https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean');
-      const json = await response.json();
-      console.log({ results: json.results })
-      dispatch(setData(json.results));
-    } catch (error) {
-      console.error(error);
-    } finally {
-      navigation.navigate('Quiz');
-      setLoading(false);
-    }
-  }
+  const onSuccess = () => { setLoading(false); navigation.navigate('Quiz'); }
+  const onFail = () => setLoading(false);
   const onPress = () => {
     setLoading(true);
-    getQuestions();
+    dispatch(
+      requestData({ onSuccess, onFail })
+    );
   }
 
   return (
