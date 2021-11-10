@@ -19,38 +19,26 @@ export default function Quiz({ navigation }: RootStackScreenProps<'Quiz'>) {
   if (!data || !currentItem) { return null }
 
   const question = decode(currentItem.question)
-  const category = decode(currentItem.category)
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>
-          {category}
-        </Text>
-      </View>
-      <View style={styles.container}>
-        <Question question={question} id={currentIdx} />
-        <Text>
-          {`${currentIdx + 1} / ${data.length}`}
-        </Text>
-      </View>
+      <Question question={question} id={currentIdx} />
+      <Text>
+        {`${currentIdx + 1} / ${data.length}`}
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   titleContainer: {
-    justifyContent: 'flex-start',
-    height: 90
+    justifyContent: 'flex-end',
+    height: 90,
   },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 80
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
+    paddingBottom: 50
+  }
 });

@@ -23,11 +23,12 @@ const quizReducer = (state = initialState, action: any) => {
     }
 
     case REQUEST_DATA_SUCCESS: {
-      console.log({ action });
-      const { data } = action;
+      const {
+        payload: { value },
+      } = action;
       return {
         ...state,
-        data,
+        data: value,
       };
     }
 

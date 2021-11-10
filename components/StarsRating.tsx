@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { StyleSheet, Image } from 'react-native';
 import * as Animatable from "react-native-animatable";
 import { View } from '../components/Themed';
-
 import { getData } from "../state/quiz/selectors";
 
 export default function StarsRating() {

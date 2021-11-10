@@ -1,8 +1,7 @@
-import type { Data, Item } from "../../types";
+import { Data } from "../../types";
 
 export type StateProps = {
   data: Data;
-  currentItem: Item | null;
   currentIdx: number;
 };
 
@@ -13,7 +12,6 @@ export type RequestDataPayload = {
 
 export const initialState: StateProps = {
   data: [],
-  currentItem: null,
   currentIdx: 0,
 };
 

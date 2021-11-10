@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "borderColor": "#90be6d",
+      "borderRadius": 10,
+      "borderWidth": 1.5,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "marginTop": 7,
+      "padding": 10,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "width": "80%",
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000",
+          },
+          Object {
+            "fontSize": 13,
+          },
+        ]
+      }
+    >
+      Is Spiderman faster than Batman?
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#90be6d",
+        "borderRadius": 8,
+        "justifyContent": "center",
+        "paddingVertical": 5,
+        "width": 57,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000",
+          },
+          Object {
+            "color": "white",
+            "fontSize": 12,
+          },
+        ]
+      }
+    >
+       
+      True
+    </Text>
+  </View>
+</View>
+`;

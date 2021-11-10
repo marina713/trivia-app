@@ -1,9 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import {
-  REQUEST_DATA,
-  REQUEST_DATA_SUCCESS,
-  RequestDataPayload,
-} from "./constants";
+import { REQUEST_DATA, RequestDataPayload } from "./constants";
+import { requestDataSuccess } from "./actions";
 
 const getQuizData = async () => {
   const response = await fetch(
@@ -15,10 +12,9 @@ const getQuizData = async () => {
 
 // worker Saga: will be fired on REQUEST_DATA actions
 function* requestData(action: { payload: RequestDataPayload }) {
-  console.log("inside fetch!", { action });
   try {
     const data = yield call(getQuizData);
-    yield put({ type: REQUEST_DATA_SUCCESS, data });
+    yield put(requestDataSuccess(data));
     yield call(action.payload.onSuccess);
   } catch (e: any) {
     yield put({ type: "DATA_FETCH_FAILED", message: e.message });
@@ -29,8 +25,8 @@ function* requestData(action: { payload: RequestDataPayload }) {
 /*
   Starts requestData on each dispatched `REQUEST_DATA` action.
 */
-function* mySaga() {
+function* rootSaga() {
   yield takeEvery(REQUEST_DATA, requestData);
 }
 
-export default mySaga;
+export default rootSaga;

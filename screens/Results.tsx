@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StyleSheet, ScrollView, Image } from 'react-native';
+import { StyleSheet, FlatList, BackHandler } from 'react-native';
 import * as Animatable from "react-native-animatable";
+import { useFocusEffect } from '@react-navigation/native';
 import { Text, View, Button } from '../components/Themed';
 
 import { getData, getScoreCorrect } from "../state/quiz/selectors";
@@ -19,6 +20,16 @@ export default function ResultsScreen({ navigation }: RootStackScreenProps<'Resu
     navigation.navigate('HomeScreen');
   }
 
+  // Prevent going back to the Quiz
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => true;
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [])
+  );
+
   return (
     <View style={styles.container}>
       <View style={styles.scoreContainer}>
@@ -26,8 +37,11 @@ export default function ResultsScreen({ navigation }: RootStackScreenProps<'Resu
         <Text style={styles.title}>{`${scoreCorrect} / ${data.length}`}</Text>
         <StarsRating />
       </View>
-      <ScrollView contentContainerStyle={styles.questionsContainer}>
-        {data.map((item, index) => (
+      <FlatList
+        data={data}
+        keyExtractor={item => item.question}
+        contentContainerStyle={styles.questionsContainer}
+        renderItem={({ item, index }) => (
           <Animatable.View
             key={index}
             animation="fadeInLeft"
@@ -35,8 +49,8 @@ export default function ResultsScreen({ navigation }: RootStackScreenProps<'Resu
           >
             <ThumbnailQuestion key={index} item={item} />
           </Animatable.View>
-        ))}
-      </ScrollView>
+        )
+        } />
       <Button onPress={onPress} style={styles.button}>
         <Text style={styles.buttonText}>PLAY AGAIN?</Text>
       </Button>
@@ -61,7 +75,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   questionsContainer: {
-    paddingBottom: 23
+    paddingBottom: 40
   },
   button: {
     marginBottom: 50,
@@ -71,7 +85,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderWidth: 1,
     borderRadius: 35,
-    borderColor: 'black'
   },
   buttonText: {
     fontSize: 23,

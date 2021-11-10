@@ -5,7 +5,7 @@ import {
   REQUEST_DATA_SUCCESS,
   RequestDataPayload,
 } from "./constants";
-import type { Data, Item } from "../../types";
+import { Data } from "../../types";
 
 export const submitAnswer = (value: string, index: number) => {
   return {
@@ -27,7 +27,7 @@ export const requestData = (payload: RequestDataPayload) => {
   };
 };
 
-export const requestDataSuccess = (value: Data) => {
+export const requestDataSuccess: any = (value: Data) => {
   return {
     type: REQUEST_DATA_SUCCESS,
     payload: { value },

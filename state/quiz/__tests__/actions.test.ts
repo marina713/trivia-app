@@ -1,6 +1,12 @@
 import configureStore from "redux-mock-store";
+import {
+  SUBMIT_ANSWER,
+  REQUEST_DATA,
+  REQUEST_DATA_SUCCESS,
+} from "../constants";
 
 import * as actions from "../actions";
+import { mockData } from "../mocks";
 
 const mockStore = configureStore();
 const store = mockStore();
@@ -11,45 +17,54 @@ const defaultParams = {
   payload: undefined,
 };
 
-const productMock = {
-  code: "123456",
-  ingredients_text: "tomato",
-  image_url: "some url",
-  product_name: "Tomato Soup",
-  brands: "Campbell's",
-};
-
-describe("Search actions", () => {
+describe("Quiz actions", () => {
   beforeEach(() => {
     store.clearActions();
   });
 
-  describe("setCurrentItem", () => {
+  describe("submitAnswer", () => {
     test("dispatches the correct action and payload", () => {
       const expectedActions = [
         {
           ...defaultParams,
-          type: "search/SET_CURRENT_ITEM",
-          payload: { value: productMock },
+          type: SUBMIT_ANSWER,
+          payload: { value: "True", index: 0 },
         },
       ];
 
-      store.dispatch(actions.setCurrentItem(productMock));
+      store.dispatch(actions.submitAnswer("True", 0));
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
 
-  describe("addToHistory", () => {
+  describe("requestData", () => {
+    test("dispatches the correct action and payload", () => {
+      const onSuccess = () => {};
+      const onFail = () => {};
+      const expectedActions = [
+        {
+          ...defaultParams,
+          type: REQUEST_DATA,
+          payload: { onSuccess, onFail },
+        },
+      ];
+
+      store.dispatch(actions.requestData({ onSuccess, onFail }));
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe("requestDataSuccess", () => {
     test("dispatches the correct action and payload", () => {
       const expectedActions = [
         {
           ...defaultParams,
-          type: "search/ADD_TO_HISTORY",
-          payload: { value: productMock },
+          type: REQUEST_DATA_SUCCESS,
+          payload: { value: mockData },
         },
       ];
 
-      store.dispatch(actions.addToHistory(productMock));
+      store.dispatch(actions.requestDataSuccess(mockData));
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

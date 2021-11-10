@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 // @ts-ignore
 import AnimatedLoader from 'react-native-animated-loader';
 
@@ -20,6 +20,8 @@ export default function HomeScreen({ navigation }: RootStackScreenProps<'HomeScr
       requestData({ onSuccess, onFail })
     );
   }
+  const colorScheme = useColorScheme();
+  const overlayColor = colorScheme === 'dark' ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.7)";
 
   return (
     <View style={styles.container}>
@@ -35,7 +37,7 @@ export default function HomeScreen({ navigation }: RootStackScreenProps<'HomeScr
         <AnimatedLoader
           source={require('../assets/lotties/loading.json')}
           visible={loading}
-          overlayColor="rgba(255,255,255,0.7)"
+          overlayColor={overlayColor}
           animationStyle={styles.lottie}
           speed={1.5} />
       </View>
@@ -75,12 +77,11 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 50,
-    paddingTop: 16,
-    paddingBottom: 20,
+    paddingTop: 15,
+    paddingBottom: 18,
     paddingHorizontal: 45,
     borderWidth: 1,
     borderRadius: 35,
-    borderColor: 'black'
   },
   buttonText: {
     fontSize: 27,
