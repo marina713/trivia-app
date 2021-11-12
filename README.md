@@ -2,7 +2,7 @@
 # trivia-app
 A Trivia App consisting on 10  `True` or `False` questions, built using `React Native`.
 
-## Getting Started with Barcode Search Mobile App
+## Getting Started with Trivia Mobile App
 
 ### Installation
 
@@ -51,7 +51,7 @@ In the project directory, you can run:
 
 ## Testing
 
-In the project directory, you can run the unit test using the following command:
+In the project directory, you can run the unit tests using the following command:
 
 ```
 > yarn jest
