@@ -6,6 +6,30 @@ import { Button, Text } from './Themed';
 import { submitAnswer } from "../state/quiz/actions";
 import { getCurrentItem } from "../state/quiz/selectors";
 
+type ComponentProps = { category: string, question: string, onPress: (val: string) => void };
+
+export const QuestionComponent = ({ category, question, onPress }: ComponentProps) => (
+  <View style={styles.container}>
+    <View style={styles.categoryContainer}>
+      <Text style={styles.category} >
+        {category}
+      </Text>
+    </View>
+    <View style={styles.itemContainer}>
+      <View style={styles.questionContainer}>
+        <Text style={styles.title}>
+          {question}
+        </Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <QuestionButton label="False" backgroundColor="#e76f51" onPress={onPress} />
+        <QuestionButton label="True" backgroundColor="#90be6d" onPress={onPress} />
+      </View>
+    </View>
+
+  </View>);
+
+
 const Question = ({ question, id }: { question: string, id: number }) => {
   const dispatch = useDispatch();
   const onPress = (val: string) => {
@@ -15,25 +39,7 @@ const Question = ({ question, id }: { question: string, id: number }) => {
 
   const category = decode(currentItem.category)
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.categoryContainer}>
-        <Text style={styles.category} >
-          {category}
-        </Text>
-      </View>
-      <View style={styles.itemContainer}>
-        <View style={styles.questionContainer}>
-          <Text style={styles.title}>
-            {question}
-          </Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <QuestionButton label="False" backgroundColor="#e76f51" onPress={onPress} />
-          <QuestionButton label="True" backgroundColor="#90be6d" onPress={onPress} />
-        </View>
-      </View>
-    </View>)
+  return <QuestionComponent category={category} question={question} onPress={onPress} />
 }
 
 type Props = { label: string, backgroundColor: string, onPress: (label: string) => void }
@@ -50,38 +56,39 @@ const QuestionButton = ({ label, backgroundColor, onPress }: Props) => {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
-    minHeight: 500,
-    maxWidth: 350,
+    width: '90%',
+    maxWidth: 370,
     margin: 30,
     borderRadius: 25,
     borderWidth: 5,
     borderColor: 'ghostwhite',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   itemContainer: {
-    flex: 1,
-    padding: 25
+    justifyContent: 'space-between',
   },
   questionContainer: {
-    flex: 1
+    minHeight: 300,
+    marginHorizontal: 25,
+    marginTop: 20,
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15,
-    marginTop: 10,
-    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 25,
+    marginTop: 20,
   },
   button: {
-    marginTop: 10,
-    marginHorizontal: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 35,
-    borderRadius: 15
+    marginHorizontal: 20,
+    borderRadius: 15,
+    height: 60,
+    width: 120,
+    justifyContent: 'center'
   },
   buttonText: {
     fontSize: 20,
     color: 'white',
+    textAlign: 'center'
   },
   title: {
     fontSize: 25,
@@ -97,9 +104,9 @@ const styles = StyleSheet.create({
   categoryContainer: {
     backgroundColor: "ghostwhite",
     alignItems: 'center',
-    paddingTop: 12,
-    paddingBottom: 18,
-    paddingHorizontal: 20
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    height: 75,
   },
 });
 
