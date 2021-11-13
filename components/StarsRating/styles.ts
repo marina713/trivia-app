@@ -7,6 +7,6 @@ export const Star = styled.Image`
 `;
 
 export const StarsContainer = styled(View)`
-  flex-direction: "row";
+  flex-direction: row;
   margin: 10px 0;
 `;

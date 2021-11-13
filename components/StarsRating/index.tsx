@@ -12,8 +12,8 @@ export default function StarsRating() {
       {data.map((item, index) => {
         const source =
           item.correct_answer === item.userAnswer
-            ? require(`../assets/images/star.png`)
-            : require(`../assets/images/star-grey.png`);
+            ? require(`../../assets/images/star.png`)
+            : require(`../../assets/images/star-grey.png`);
         return (
           <Animatable.View
             key={index}

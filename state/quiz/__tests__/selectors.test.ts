@@ -1,8 +1,11 @@
+import { decode } from "html-entities";
 import {
   getData,
   getCurrentIdx,
   getCurrentItem,
   getScoreCorrect,
+  getCurrentNormalisedQuestion,
+  getCurrentNormalisedCategory,
 } from "../selectors";
 import { mockState, mockData } from "../mocks";
 
@@ -25,5 +28,13 @@ describe("Quiz Selectors", () => {
       mockState.quiz.currentIdx
     );
     expect(selected).toEqual(mockData[mockState.quiz.currentIdx]);
+  });
+  it("should return correct value of getCurrentNormalisedQuestion", () => {
+    const selected = getCurrentNormalisedQuestion.resultFunc(mockData[0]);
+    expect(selected).toEqual(decode(mockData[0].question));
+  });
+  it("should return correct value of getCurrentNormalisedCategory", () => {
+    const selected = getCurrentNormalisedCategory.resultFunc(mockData[0]);
+    expect(selected).toEqual(decode(mockData[0].category));
   });
 });

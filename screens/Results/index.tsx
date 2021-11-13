@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StyleSheet, FlatList, BackHandler } from 'react-native';
 import * as Animatable from "react-native-animatable";
 import { useFocusEffect } from '@react-navigation/native';
-import { Text, View, Button } from '../components/Themed';
 
-import { getData, getScoreCorrect } from "../state/quiz/selectors";
-import { reset } from "../state/quiz/actions";
-import { RootStackScreenProps } from '../types';
-import ThumbnailQuestion from '../components/ThumbnailQuestion';
-import StarsRating from '../components/StarsRating';
+import { getData, getScoreCorrect } from "../../state/quiz/selectors";
+import { reset } from "../../state/quiz/actions";
+import { RootStackScreenProps } from '../../types';
+import ThumbnailQuestion from '../../components/ThumbnailQuestion';
+import StarsRating from '../../components/StarsRating';
+import { Container, Title, ScoreContainer, ButtonReplay, ButtonText } from './styles';
 
 export default function ResultsScreen({ navigation }: RootStackScreenProps<'Results'>) {
   const dispatch = useDispatch();
@@ -31,12 +31,12 @@ export default function ResultsScreen({ navigation }: RootStackScreenProps<'Resu
   );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.scoreContainer}>
-        <Text style={styles.title}>You scored</Text>
-        <Text style={styles.title}>{`${scoreCorrect} / ${data.length}`}</Text>
+    <Container>
+      <ScoreContainer>
+        <Title>You scored</Title>
+        <Title>{`${scoreCorrect} / ${data.length}`}</Title>
         <StarsRating />
-      </View>
+      </ScoreContainer>
       <FlatList
         data={data}
         keyExtractor={item => item.question}
@@ -51,47 +51,15 @@ export default function ResultsScreen({ navigation }: RootStackScreenProps<'Resu
           </Animatable.View>
         )
         } />
-      <Button onPress={onPress} style={styles.button}>
-        <Text style={styles.buttonText}>PLAY AGAIN?</Text>
-      </Button>
-    </View>
+      <ButtonReplay onPress={onPress}>
+        <ButtonText>PLAY AGAIN?</ButtonText>
+      </ButtonReplay>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 80,
-  },
-  scoreContainer: {
-    marginBottom: 10,
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
   questionsContainer: {
     paddingBottom: 40
-  },
-  button: {
-    marginBottom: 50,
-    marginTop: 20,
-    paddingTop: 16,
-    paddingBottom: 20,
-    paddingHorizontal: 30,
-    borderWidth: 1,
-    borderRadius: 35,
-  },
-  buttonText: {
-    fontSize: 23,
-    fontWeight: 'bold',
-  },
-  starsContainer: {
-    flexDirection: 'row',
-    marginVertical: 10
   }
 });

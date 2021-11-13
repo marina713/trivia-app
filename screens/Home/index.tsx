@@ -35,7 +35,7 @@ export default function HomeScreen({ navigation }: RootStackScreenProps<'HomeScr
       <SubtitleContainer>
         <Subtitle>Can you score 100% ?</Subtitle>
         <AnimatedLoader
-          source={require('../assets/lotties/loading.json')}
+          source={require('../../assets/lotties/loading.json')}
           visible={loading}
           overlayColor={overlayColor}
           animationStyle={styles.lottie}

@@ -1,11 +1,12 @@
 import React from 'react';
-import { decode } from 'html-entities';
 import { useDispatch, useSelector } from "react-redux";
 import { submitAnswer } from "../../state/quiz/actions";
-import { getCurrentItem } from "../../state/quiz/selectors";
+import { getCurrentNormalisedCategory } from "../../state/quiz/selectors";
 import { Container, ItemContainer, QuestionContainer, ButtonContainer, CategoryContainer, ButtonWrapper, ButtonText, Title, Category } from './styles'
 
 type ComponentProps = { category: string, question: string, onPress: (val: string) => void };
+type QuestionProps = { question: string, id: number }
+type ButtonProps = { label: string, backgroundColor: string, onPress: (label: string) => void }
 
 export const QuestionComponent = ({ category, question, onPress }: ComponentProps) => (
   <Container>
@@ -27,21 +28,15 @@ export const QuestionComponent = ({ category, question, onPress }: ComponentProp
     </ItemContainer>
   </Container>);
 
-
-const Question = ({ question, id }: { question: string, id: number }) => {
+const Question = ({ question, id }: QuestionProps) => {
   const dispatch = useDispatch();
-  const onPress = (val: string) => {
-    dispatch(submitAnswer(val, id))
-  }
-  const currentItem = useSelector(getCurrentItem);
-  const category = decode(currentItem.category)
+  const onPress = (val: string) => dispatch(submitAnswer(val, id));
+  const category = useSelector(getCurrentNormalisedCategory);
 
   return <QuestionComponent category={category} question={question} onPress={onPress} />
 }
 
-type Props = { label: string, backgroundColor: string, onPress: (label: string) => void }
-
-const QuestionButton = ({ label, backgroundColor, onPress }: Props) => {
+const QuestionButton = ({ label, backgroundColor, onPress }: ButtonProps) => {
   return (
     <ButtonWrapper
       style={{ backgroundColor }}
@@ -50,6 +45,5 @@ const QuestionButton = ({ label, backgroundColor, onPress }: Props) => {
     </ButtonWrapper>
   )
 }
-
 
 export default Question;
