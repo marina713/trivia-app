@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { StyleSheet, useColorScheme } from 'react-native';
+import { StyleSheet, useColorScheme, Alert } from 'react-native';
 // @ts-ignore
 import AnimatedLoader from 'react-native-animated-loader';
 
@@ -11,18 +11,30 @@ import { Container, TitleContainer, Title, SubtitleContainer, Subtitle, ButtonWr
 
 export default function HomeScreen({ navigation }: RootStackScreenProps<'HomeScreen'>) {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false)
-  const onSuccess = () => {
-    setLoading(false);
-    navigation.navigate('Quiz');
-  }
-  const onFail = () => setLoading(false);
+  const [loading, setLoading] = useState(false);
   const onPress = () => {
     setLoading(true);
     dispatch(
       requestData({ onSuccess, onFail })
     );
   }
+  const onSuccess = () => {
+    setLoading(false);
+    navigation.navigate('Quiz');
+  }
+  const onFail = () => {
+    setLoading(false);
+    Alert.alert(
+      'Error',
+      'Something went wrong',
+      [{
+        text: "Cancel",
+        style: "cancel"
+      },
+      { text: "Try again", onPress }
+      ])
+  };
+
   const colorScheme = useColorScheme();
   const overlayColor = colorScheme === 'dark' ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.7)";
 
