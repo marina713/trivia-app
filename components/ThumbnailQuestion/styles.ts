@@ -1,7 +1,14 @@
 import styled from "styled-components/native";
 import { Text } from "../Themed";
 
-export const Container = styled.View<any>`
+type ContainerProps = {
+  borderColor: string;
+};
+type ButtonContainerProps = {
+  backgroundColor: string;
+};
+
+export const Container = styled.View<ContainerProps>`
   margin-top: 7px;
   flex-direction: row;
   justify-content: space-between;
@@ -9,19 +16,20 @@ export const Container = styled.View<any>`
   padding: 10px;
   border-radius: 10px;
   border-width: 1.5px;
-  border-color: ${(props) => props.borderColor};
+  border-color: ${({ borderColor }: ContainerProps) => borderColor};
 `;
 
 export const QuestionContainer = styled.View`
   width: 80%;
 `;
-export const ButtonContainer = styled.View<any>`
+export const ButtonContainer = styled.View<ButtonContainerProps>`
   padding: 0 5px;
   width: 57px;
   border-radius: 8px;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${({ backgroundColor }: ButtonContainerProps) =>
+    backgroundColor};
   height: 27px;
 `;
 

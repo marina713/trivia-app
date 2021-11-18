@@ -1,5 +1,5 @@
-import { call, put, takeEvery } from "redux-saga/effects";
-import { REQUEST_DATA, RequestDataPayload } from "./constants";
+import { call, put, takeEvery, Effect } from "redux-saga/effects";
+import { REQUEST_DATA, RequestDataAction } from "./constants";
 import { requestDataSuccess } from "./actions";
 
 const getQuizData = async () => {
@@ -11,7 +11,7 @@ const getQuizData = async () => {
 };
 
 // worker Saga: will be fired on REQUEST_DATA actions
-function* requestData(action: { payload: RequestDataPayload }) {
+function* requestData(action: RequestDataAction): Generator<Effect, any, any> {
   try {
     const data = yield call(getQuizData);
     yield put(requestDataSuccess(data));

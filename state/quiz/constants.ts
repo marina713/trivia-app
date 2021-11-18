@@ -5,9 +5,16 @@ export type StateProps = {
   currentIdx: number;
 };
 
-export type RequestDataPayload = {
+type RequestDataPayload = {
   onSuccess: () => void;
   onFail: () => void;
+};
+
+export type RequestDataAction = {
+  payload: RequestDataPayload;
+  type: string;
+  meta?: any;
+  error?: boolean;
 };
 
 export const initialState: StateProps = {

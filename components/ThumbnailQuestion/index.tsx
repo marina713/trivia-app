@@ -2,10 +2,11 @@ import React from 'react';
 import { decode } from 'html-entities';
 import { Item } from "../../types";
 import { Container, QuestionContainer, ButtonContainer, ButtonText, QuestionText } from './styles';
+import colors from "../../constants/Colors";
 
 
 const ThumbnailQuestion = ({ item }: { item: Item }) => {
-  const color = item.correct_answer === item.userAnswer ? "#90be6d" : "#e76f51";
+  const color = item.correct_answer === item.userAnswer ? colors.primary.green : colors.primary.red;
   return (
     <Container borderColor={color}>
       <QuestionContainer >
@@ -18,7 +19,8 @@ const ThumbnailQuestion = ({ item }: { item: Item }) => {
           {item.userAnswer}
         </ButtonText>
       </ButtonContainer>
-    </Container>)
+    </Container>
+  )
 }
 
 export default ThumbnailQuestion;

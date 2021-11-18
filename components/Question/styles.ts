@@ -15,15 +15,18 @@ export const Container = styled.View`
 export const ItemContainer = styled.View`
   justify-content: space-between;
 `;
+
 export const QuestionContainer = styled.View`
   min-height: 300px;
   margin: 20px 25px 0;
 `;
+
 export const ButtonContainer = styled.View`
   flex-direction: row;
   justify-content: center;
   margin: 20px 0 25px;
 `;
+
 export const CategoryContainer = styled.View`
   background-color: ghostwhite;
   align-items: center;

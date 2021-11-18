@@ -11,7 +11,7 @@ export const getData = createSelector(
 export const getCurrentIdx = createSelector(getQuiz, (data) => data.currentIdx);
 export const getCurrentItem = createSelector(
   [getData, getCurrentIdx],
-  (data, currentIdx) => data[currentIdx]
+  (data, currentIdx) => data[currentIdx] || {}
 );
 export const getScoreCorrect = createSelector(
   getQuiz,

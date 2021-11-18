@@ -4,7 +4,7 @@ import * as Animatable from "react-native-animatable";
 import { getData } from "../../state/quiz/selectors";
 import { Star, StarsContainer } from './styles';
 
-export default function StarsRating() {
+const StarsRating = () => {
   const data = useSelector(getData);
 
   return (
@@ -27,3 +27,5 @@ export default function StarsRating() {
     </StarsContainer>
   );
 }
+
+export default StarsRating;

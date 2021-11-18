@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { submitAnswer } from "../../state/quiz/actions";
 import { getCurrentNormalisedCategory } from "../../state/quiz/selectors";
 import { Container, ItemContainer, QuestionContainer, ButtonContainer, CategoryContainer, ButtonWrapper, ButtonText, Title, Category } from './styles'
+import colors from "../../constants/Colors";
 
 type ComponentProps = { category: string, question: string, onPress: (val: string) => void };
 type QuestionProps = { question: string, id: number }
@@ -22,8 +23,8 @@ export const QuestionComponent = ({ category, question, onPress }: ComponentProp
         </Title>
       </QuestionContainer>
       <ButtonContainer>
-        <QuestionButton label="False" backgroundColor="#e76f51" onPress={onPress} />
-        <QuestionButton label="True" backgroundColor="#90be6d" onPress={onPress} />
+        <QuestionButton label="False" backgroundColor={colors.primary.red} onPress={onPress} />
+        <QuestionButton label="True" backgroundColor={colors.primary.green} onPress={onPress} />
       </ButtonContainer>
     </ItemContainer>
   </Container>);

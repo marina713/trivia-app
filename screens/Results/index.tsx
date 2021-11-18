@@ -20,7 +20,7 @@ export default function ResultsScreen({ navigation }: RootStackScreenProps<'Resu
     navigation.navigate('HomeScreen');
   }
 
-  // Prevent going back to the Quiz
+  // Prevents going back to the Quiz
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => true;

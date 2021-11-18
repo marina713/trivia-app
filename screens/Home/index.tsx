@@ -12,7 +12,10 @@ import { Container, TitleContainer, Title, SubtitleContainer, Subtitle, ButtonWr
 export default function HomeScreen({ navigation }: RootStackScreenProps<'HomeScreen'>) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false)
-  const onSuccess = () => { setLoading(false); navigation.navigate('Quiz'); }
+  const onSuccess = () => {
+    setLoading(false);
+    navigation.navigate('Quiz');
+  }
   const onFail = () => setLoading(false);
   const onPress = () => {
     setLoading(true);

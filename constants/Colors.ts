@@ -12,4 +12,8 @@ export default {
     background: "#22223b",
     tint: defaultDark,
   },
+  primary: {
+    green: "#90be6d",
+    red: "#e76f51",
+  },
 };
