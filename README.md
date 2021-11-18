@@ -18,6 +18,10 @@ In the project directory, you can run:
 > yarn android
 ```
 
+## Demo
+
+https://user-images.githubusercontent.com/33632044/142448042-9c46267c-cb6f-4e19-97d0-e2f61002e8bd.mp4
+
 
 
 ## Screens
